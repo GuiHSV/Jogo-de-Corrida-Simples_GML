@@ -1,0 +1,53 @@
+{
+  "resourceType": "GMProject",
+  "resourceVersion": "1.6",
+  "name": "CorridaSimples",
+  "resources": [
+    {"id":{"name":"spr_obstaculo_teste","path":"sprites/spr_obstaculo_teste/spr_obstaculo_teste.yy",},"order":3,},
+    {"id":{"name":"spr_teste_correndo","path":"sprites/spr_teste_correndo/spr_teste_correndo.yy",},"order":1,},
+    {"id":{"name":"scr_geral","path":"scripts/scr_geral/scr_geral.yy",},"order":0,},
+    {"id":{"name":"obj_Player","path":"objects/obj_Player/obj_Player.yy",},"order":0,},
+    {"id":{"name":"obj_Obstaculo","path":"objects/obj_Obstaculo/obj_Obstaculo.yy",},"order":2,},
+    {"id":{"name":"spr_solido","path":"sprites/spr_solido/spr_solido.yy",},"order":2,},
+    {"id":{"name":"obj_Solido","path":"objects/obj_Solido/obj_Solido.yy",},"order":1,},
+    {"id":{"name":"spr_player_parado","path":"sprites/spr_player_parado/spr_player_parado.yy",},"order":4,},
+    {"id":{"name":"obj_Controlador","path":"objects/obj_Controlador/obj_Controlador.yy",},"order":3,},
+    {"id":{"name":"Room2","path":"rooms/Room2/Room2.yy",},"order":1,},
+    {"id":{"name":"spr_player_correndo","path":"sprites/spr_player_correndo/spr_player_correndo.yy",},"order":5,},
+    {"id":{"name":"spr_teste_parado","path":"sprites/spr_teste_parado/spr_teste_parado.yy",},"order":0,},
+    {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},"order":0,},
+  ],
+  "Options": [
+    {"name":"Windows","path":"options/windows/options_windows.yy",},
+    {"name":"operagx","path":"options/operagx/options_operagx.yy",},
+    {"name":"Main","path":"options/main/options_main.yy",},
+  ],
+  "defaultScriptType": 1,
+  "isEcma": false,
+  "configs": {
+    "name": "Default",
+    "children": [],
+  },
+  "RoomOrderNodes": [
+    {"roomId":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
+    {"roomId":{"name":"Room2","path":"rooms/Room2/Room2.yy",},},
+  ],
+  "Folders": [
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Notes","folderPath":"folders/Notes.yy","order":5,},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Objects","folderPath":"folders/Objects.yy","order":3,},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Rooms","folderPath":"folders/Rooms.yy","order":2,},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Scripts","folderPath":"folders/Scripts.yy","order":4,},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Sprites","folderPath":"folders/Sprites.yy","order":1,},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Tile Sets","folderPath":"folders/Tile Sets.yy","order":0,},
+  ],
+  "AudioGroups": [
+    {"resourceType":"GMAudioGroup","resourceVersion":"1.3","name":"audiogroup_default","targets":-1,},
+  ],
+  "TextureGroups": [
+    {"resourceType":"GMTextureGroup","resourceVersion":"1.3","name":"Default","isScaled":true,"compressFormat":"bz2","loadType":"default","directory":"","autocrop":true,"border":2,"mipsToGenerate":0,"groupParent":null,"targets":-1,},
+  ],
+  "IncludedFiles": [],
+  "MetaData": {
+    "IDEVersion": "2022.11.1.56",
+  },
+}

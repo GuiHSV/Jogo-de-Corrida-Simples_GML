@@ -1,37 +1,35 @@
 if keyboard_check_pressed(ord("R")) estado = "morto";
 
+#region CONTROLES & SENSORES
 //var right = keyboard_check(ord("D"));
 //var left = keyboard_check(ord("A"));
-var jump = keyboard_check_pressed(vk_space);
+var jump = keyboard_check_pressed(ord("W"))// or keyboard_check_pressed(vk_up) or keyboard_check_pressed(mb_left) or keyboard_check_pressed(vk_space);
+var up = keyboard_check(ord("W"));
+var down = keyboard_check(ord("S"))// or keyboard_check_pressed(vk_down) or keyboard_check_pressed(mb_right);
 
-if jump
-{
-	velv -= 10
-}
+var chao = place_meeting(x,y+1, obj_Solido_base);
+#endregion
 
-//velh = (right - left) * 3;
+#region GERENCIADOR DE BUFFER
+//jump_buffer
+
+#endregion
+
 
 
 switch(estado)
 {
-	//case "espera": //esperando o jogo ficar pronto para começar
-	
 	#region PARADO
 	case "parado": //esperando tecla ser precionada para começar
 	{
-		if switch_estado
-		{
-			global.estaJogando = false;
-			sprite_index = spr_teste_parado;
-			switch_estado = false;
-		}
+		if(sprite_index != spr_teste_parado) sprite_index = spr_teste_parado;
 		
 		//	Saída
-		if keyboard_check_pressed(vk_anykey)
+		if keyboard_check_pressed(vk_anykey) or keyboard_check_pressed(mb_any)
 		{
-			global.estaJogando = true;
+			global.jogoComecou = true;
+			image_index = 0;
 			estado = "correndo";
-			switch_estado = true;
 		}
 		break;
 	}
@@ -40,77 +38,53 @@ switch(estado)
 	#region CORRENDO
 	case "correndo": 
 	{
-		if switch_estado
-		{
-			//global.estaJogando = false;
-			sprite_index = spr_teste_correndo;
-			switch_estado = false;
-		}
+		if !down and (sprite_index != spr_teste_correndo) sprite_index = spr_teste_correndo;
+		else if down and (sprite_index != spr_teste_abaixado) sprite_index = spr_teste_abaixado;
 		
 		//	Saída
-		if false //se pulou
+		if !chao or jump
 		{
+			velv = -6;
+			image_index = 0;
 			estado = "pulando";
-			switch_estado = true;
 		}
 		break;
 	}
 	#endregion
 	
-	/*
+	#region PULANDO
 	case "pulando":
-	
-	break;//*/
+	{
+		if(sprite_index != spr_teste_pulando) sprite_index = spr_teste_pulando;
+		
+		//chama gravidade
+		if !chao
+		{
+			velv += .3 - .1 * up + .2 * down; //melhorar isso aqui que tá um horror
+		}
+		
+		
+		if velv < 0
+		{
+			if(image_index > image_number -2) image_index = image_number -2 //numero provisório
+		}
+		else
+		{
+			if(image_index > image_number -1) image_index = image_number -1 //numero provisório
+		}
+		
+		//	Saíndo
+		if chao
+		{
+			image_index = 0;
+			estado = "correndo";
+		}
+		break;
+	}
+	#endregion
 	
 	case "morto":
 		show_message("MORREU!");
-		room_restart();
+		/** /global.jogoComecou = false; //*/ game_restart();
 	break;
 }
-
-
-/*
-var _velh = sign(velh);
-repeat(abs(velh))
-{
-	if place_meeting(x+_velh, y, obj_Solido) and !place_meeting(x+_velh, y-1, obj_Solido)
-	{
-		y--;
-	}
-	
-	if !place_meeting(x+_velh, y, obj_Solido) and !place_meeting(x+_velh, y+1, obj_Solido) and !place_meeting(x+_velh, y+2, obj_Solido)
-	{
-		//show_message("teste")
-		y++;
-	}
-
-	if place_meeting(x+_velh,y, obj_Solido)
-	{
-		show_message("bateu")
-		velh = 0;
-		break;
-	}
-	
-	x += _velh;
-}
-
-//
-
-if !place_meeting(x,y+1, obj_Solido)
-{
-	//show_message("no ar");
-	velv += .5;
-}
-
-var _velv = sign(velv);
-repeat(abs(velv))
-{
-	if place_meeting(x,y+_velv, obj_Solido)
-	{
-		velv = 0;
-		break;
-	}
-	
-	y += _velv;
-}
-

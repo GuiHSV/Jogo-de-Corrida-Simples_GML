@@ -1,8 +1,13 @@
-/// @description Insert description here
-// You can write your code in this editor
 
-
-
-
-
+var _velv = sign(velv);
+repeat(abs(velv))
+{
+	if place_meeting(x,y+_velv, obj_Solido_base)
+	{
+		velv = 0;
+		break;
+	}
+	
+	y += _velv;
+}
 

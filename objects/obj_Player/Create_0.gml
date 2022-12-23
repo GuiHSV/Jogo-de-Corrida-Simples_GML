@@ -2,12 +2,12 @@
 #region VARIÁVEIS
 //	Propriedades
 estado = "parado";
-switch_estado = true;
+//massa = 1;
 
 //	Movimentação
 velv = 0;
+//velh golbal auxiliar
 
 #endregion
 
-velh = 0;
 

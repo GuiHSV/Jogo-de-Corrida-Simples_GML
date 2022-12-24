@@ -1,8 +1,16 @@
-/// @description Insert description here
-// You can write your code in this editor
 
+#region DESENHA PONTUAÇÃO
 
+#endregion
 
+#region DESENHA EXTRA
+//Desenha botão de iniciar
+
+//Desenha tela de pause
+
+//Desenha tela de game over/restart
+
+#endregion
 
 
 

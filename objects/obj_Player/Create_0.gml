@@ -8,6 +8,9 @@ estado = "parado";
 velv = 0;
 //velh golbal auxiliar
 
+//	Auxiliares
+jump_buffer = 0;
+
 #endregion
 
 

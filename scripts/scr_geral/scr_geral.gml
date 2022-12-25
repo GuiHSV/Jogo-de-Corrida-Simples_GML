@@ -6,22 +6,22 @@
 function moveH_geral(){//objeto){
 	with(other)
 	{
-		var _velh = sign(global.velhGeral);
-		repeat(abs(global.velhGeral))
+		var velh = global.velhGeral + other.velh;
+		var _velh = sign(velh);
+		repeat(abs(velh))
 		{
 			#region INTERAÇÃO COM RAMPAS
-			/*
-			if object_get_name(object_index) == "obj_Solido_movel" //tentar ver se "if object_get_name(id)" serve
+			/*if object_get_name(object_index) == "obj_Solido_movel" //tentar ver se "if object_get_name(id)" funciona
 			{
-				//código que faz player subir e descer rampa
+				//CÁDIGOS VINDOS DO PLAYER, NÃO ADAPTADOS PRO OBJ_SOLIDO_MOVEL
+				//faz player subir rampa
 				if place_meeting(x+_velh, y, obj_Solido) and !place_meeting(x+_velh, y-1, obj_Solido)
 				{
 					y--;
 				}
-	
+				//faz player descer rampa
 				if !place_meeting(x+_velh, y, obj_Solido) and !place_meeting(x+_velh, y+1, obj_Solido) and !place_meeting(x+_velh, y+2, obj_Solido)
 				{
-					//show_message("teste")
 					y++;
 				}
 			}//*/
@@ -31,13 +31,13 @@ function moveH_geral(){//objeto){
 			if(place_meeting(x,y, obj_Player)) obj_Player.estado = "morto";
 		}
 	}
+	
+	//melhorar código para acumular valores não inteiros para serem usado
 }
 
-/*function moveV_geral(){
-	//precisa alinhar todos os objetos móveis quando movelos verticalmente
+/*function alinhamento_vertical(){
+	alinha os objetos verticalmnete quando necessário
 }//*/
 
-
-
-//function gravidade(){}
+//function gravidade(){} será usado por: player, bola de feno, outroPassaro e outras coisas
 

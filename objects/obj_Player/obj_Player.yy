@@ -3,8 +3,8 @@
   "resourceVersion": "1.0",
   "name": "obj_Player",
   "spriteId": {
-    "name": "spr_teste_parado",
-    "path": "sprites/spr_teste_parado/spr_teste_parado.yy",
+    "name": "spr_player_parado",
+    "path": "sprites/spr_player_parado/spr_player_parado.yy",
   },
   "solid": false,
   "visible": true,

@@ -66,6 +66,7 @@
   "layers": [
     {"resourceType":"GMImageFolderLayer","resourceVersion":"1.0","name":"11a75787-da2a-4545-a323-68f66428b1f4","layers":[
         {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"a8093669-f7be-4804-acad-4e03282e9dfd","visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"Bola de feno",},
+        {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"780f4dcb-2df2-4f7a-90b8-a84d892afabc","visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"Layer 1",},
         {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"712ae66a-3b32-4f9c-b9dc-cba6ec361b6b","visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"cacto G 4",},
         {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"f0481b05-df48-47af-898b-bc1b51db59dd","visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"Layer 4",},
         {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"3debfec0-aebd-483c-aa35-c361cc43531f","visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"cacto G 3",},

@@ -47,7 +47,7 @@ switch(estado)
 		//	Saída
 		if !chao or jump_buffer
 		{
-			velv = -6;
+			velv = -5;
 			image_index = 0;
 			estado = "pulando";
 		}
@@ -58,29 +58,19 @@ switch(estado)
 	#region PULANDO
 	case "pulando":
 	{
-		if(sprite_index != spr_teste_pulando)
-		{
-			sprite_index = spr_teste_pulando;
-		}
+		if(sprite_index != spr_player_pulando) sprite_index = spr_player_pulando;
 		
-		#region CÓDIGO FEIO DE GRAVIDADE E ANIMAÇÕA DE PULO
-		//chama gravidade
-		if !chao
-		{
-			velv += .3 - .1 * up + .2 * down; //melhorar isso aqui que tá um horror
-		}
+		#region GRAVIDADE & ANIMAÇÃO
+		gravidade();
+		if(velv <= 0) velv -= .1 * up;
+		else velv += .2 * down;
 		
-		if velv < 0 //talvez juntar o sistema de gravidade com o sistema de troca de sprite
-		{
-			if(image_index > image_number -2) image_index = image_number -2 //numero provisório
-		}
-		else
-		{
-			if(image_index > image_number -1) image_index = image_number -1 //numero provisório
-		}
+		if(velv < -.5) and (image_index > 4) image_index = 1;
+		else if(-.5 < velv) and (velv < 0) image_index = 4;
+		else if(!chao) and (image_index > 8) image_index = 5
 		#endregion
 		
-		//	Saíndo
+		//	Saída
 		if chao
 		{
 			image_index = 1;
@@ -92,9 +82,20 @@ switch(estado)
 	
 	#region MORTO
 	case "morto":
-		show_message("MORREU!");
-		//sistema de restart
-		/** /global.jogoComecou = false; //*/ game_restart();
-	break;
+	{
+		global.jogoComecou = false;
+		if sprite_index != spr_player_correndo_morto and sprite_index != spr_player_abaixado_morto and sprite_index != spr_player_pulando_morto
+		{
+			if(sprite_index == spr_player_correndo) sprite_index = spr_player_correndo_morto;
+			else if(sprite_index == spr_player_abaixado) sprite_index = spr_player_abaixado_morto;
+			else if(sprite_index == spr_player_pulando) sprite_index = spr_player_pulando_morto;
+		}
+		else
+		{
+			show_message("MORREU!");
+			game_restart();
+		}
+		break;
+	}
 	#endregion
 }

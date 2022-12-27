@@ -2,7 +2,7 @@
 #region VARIÁVEIS
 //	Propriedades
 estado = "parado";
-//massa = 1;
+massa = 3;
 
 //	Movimentação
 velv = 0;

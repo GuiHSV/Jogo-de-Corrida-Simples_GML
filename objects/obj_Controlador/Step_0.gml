@@ -3,7 +3,7 @@
 
 #endregion
 
-
+if(global.jogoComecou) moveH_geral();
 
 #region CRINADO TERRENO (!)
 //	PODE:
@@ -15,7 +15,7 @@
 #endregion
 
 #region CRIANDO OBSTÁCULOS (*)
-if(obstaculo_delay < 1) //and (pode criar um obstáculo)
+if(obstaculo_delay < 1) //and false //and (pode criar um obstáculo)
 {
 	var view_x = camera_get_view_border_x(view_camera[0]);
 	var view_y = camera_get_view_border_y(view_camera[0]); //incompleto

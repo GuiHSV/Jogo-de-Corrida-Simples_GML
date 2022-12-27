@@ -1,12 +1,13 @@
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 
+#macro GRAVIDADE .1
 
 
-function moveH_geral(){//objeto){
-	with(other)
+function moveH_geral(){
+	with(obj_Obstaculo)
 	{
-		var velh = global.velhGeral + other.velh;
+		var velh = global.velhGeral + self.velh;
 		var _velh = sign(velh);
 		repeat(abs(velh))
 		{
@@ -28,16 +29,26 @@ function moveH_geral(){//objeto){
 			#endregion
 			
 			x += _velh;
-			if(place_meeting(x,y, obj_Player)) obj_Player.estado = "morto";
+			if(place_meeting(x,y, obj_Player))
+			{
+				obj_Player.estado = "morto";
+				break;
+			}
 		}
 	}
 	
 	//melhorar código para acumular valores não inteiros para serem usado
+	//melhorar a precisão da colidão
 }
 
 /*function alinhamento_vertical(){
 	alinha os objetos verticalmnete quando necessário
 }//*/
 
-//function gravidade(){} será usado por: player, bola de feno, outroPassaro e outras coisas
+function gravidade(){ //será usado por: player, bola de feno, outroPassaro e outras coisas
+	with(other) //incompleto?
+	{
+		if(!chao) velv += massa * GRAVIDADE;
+	}
+}
 

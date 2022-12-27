@@ -1,7 +1,5 @@
-/// @description Insert description here
-// You can write your code in this editor
 
-if(global.jogoComecou) moveH_geral();
+//if(global.jogoComecou) moveH_geral();
 
 
 if(x + sprite_width/2 < camera_get_view_x(view_camera[0]))

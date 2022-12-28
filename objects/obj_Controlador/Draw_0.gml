@@ -6,7 +6,7 @@ draw_text(view_x+10,view_y+30, "multiplicador: " + string(multiplicador) + " | v
 
 
 
-#region DESENHA PONTUAÇÃO
+#region DESENHA PONTUAÇÃO (!)
 //desenha pontuação
 
 {/*} NOTA:
@@ -18,7 +18,7 @@ draw_text(view_x+10,view_y+30, "multiplicador: " + string(multiplicador) + " | v
 */}
 #endregion
 
-#region DESENHA EXTRA
+#region DESENHA EXTRA (!)
 //Desenha botão de iniciar quando player estiver parado
 
 //Desenha tela de pause quando pausado

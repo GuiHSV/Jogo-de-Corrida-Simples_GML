@@ -2,12 +2,13 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 
 #macro GRAVIDADE .1
+#macro VELH_INICIAL -2
 
 
 function moveH_geral(){
 	with(obj_Obstaculo)
 	{
-		var velh = global.velhGeral + self.velh;
+		var velh = global.velhGlobal + self.velh;
 		var _velh = sign(velh);
 		repeat(abs(velh))
 		{

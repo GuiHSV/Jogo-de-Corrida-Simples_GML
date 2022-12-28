@@ -8,18 +8,21 @@ up = keyboard_check(ord("W"));
 down = keyboard_check(ord("S"))// or keyboard_check_pressed(vk_down) or keyboard_check_pressed(mb_right);
 jump = keyboard_check_pressed(ord("W"))// or keyboard_check_pressed(vk_up) or keyboard_check_pressed(mb_left) or keyboard_check_pressed(vk_space);
 
-chao = place_meeting(x,y+1, obj_Solido_base);
+chao = place_meeting(x,y+1, obj_Solido_base); //checkar apena um ponto abaixo
 #endregion
 
-#region GERENCIADOR DE BUFFER
-if(jump) jump_buffer = room_speed / 2;
+#region GERENCIADOR
+if(global.GameStatus == "Iniciado" or global.GameStatus == "Jogando") image_speed = 1;
+else image_speed = 0;
+
+if(jump) jump_buffer = room_speed / 4;
 else if(jump_buffer > 0) jump_buffer--;
 //...
 
 #endregion
 
 
-
+#region MAQUINA DE ESTADOS
 switch(estado)
 {
 	#region PARADO
@@ -28,9 +31,9 @@ switch(estado)
 		if(sprite_index != spr_player_parado) sprite_index = spr_player_parado;
 		
 		//	Saída
-		if keyboard_check_pressed(vk_anykey) //or keyboard_check_pressed(mb_any)
+		if keyboard_check_pressed(vk_anykey) //alterar quando for implementar os botões de menu e outras coisas
 		{
-			global.jogoComecou = true;
+			global.GameStatus = "Jogando";
 			image_index = 0;
 			estado = "correndo";
 		}
@@ -67,7 +70,7 @@ switch(estado)
 		
 		if(velv < -.5) and (image_index > 4) image_index = 1;
 		else if(-.5 < velv) and (velv < 0) image_index = 4;
-		else if(!chao) and (image_index > 8) image_index = 5
+		else if(!chao) and (image_index > 8) image_index = 5;
 		#endregion
 		
 		//	Saída
@@ -80,15 +83,17 @@ switch(estado)
 	}
 	#endregion
 	
-	#region MORTO
+	#region MORTO (*)
 	case "morto":
 	{
-		global.jogoComecou = false;
-		if sprite_index != spr_player_correndo_morto and sprite_index != spr_player_abaixado_morto and sprite_index != spr_player_pulando_morto
+		global.GameStatus = "FimDeJogo";
+		if sprite_index != spr_player_morto
 		{
-			if(sprite_index == spr_player_correndo) sprite_index = spr_player_correndo_morto;
-			else if(sprite_index == spr_player_abaixado) sprite_index = spr_player_abaixado_morto;
-			else if(sprite_index == spr_player_pulando) sprite_index = spr_player_pulando_morto;
+			var abaixado = (sprite_index == spr_player_abaixado);
+			var pulando = (sprite_index == spr_player_pulando);
+			sprite_index = spr_player_morto;
+			if(abaixado) image_index += 5;
+			else if(pulando) image_index += 10;
 		}
 		else
 		{
@@ -99,3 +104,19 @@ switch(estado)
 	}
 	#endregion
 }
+#endregion
+
+
+#region MOVIMENTAÇÃO VERTICAL
+var _velv = sign(velv);
+repeat(abs(velv))
+{
+	if place_meeting(x,y+_velv, obj_Solido_base)
+	{
+		velv = 0;
+		break;
+	}
+	
+	y += _velv;
+}
+#endregion

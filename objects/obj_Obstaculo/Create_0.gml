@@ -5,6 +5,7 @@
 
 //	Movimentação
 velh = 0;
+velh_acumulador = .0;
 
 // Aparência
 if(sprite_index == spr_obstaculo_teste)

@@ -58,8 +58,10 @@ if global.GameStatus == "Jogando"
 	with obj_Obstaculo
 	{
 		var velh = global.velhGlobal + self.velh;
-		var _velh = sign(velh);
-		repeat(abs(velh))
+		//var abs_velh = abs(velh);
+		
+		//var _velh = sign(velh);
+		repeat(abs(velh + velh_acumulador))
 		{
 			#region INTERAÇÃO COM RAMPAS (!)
 			/*if object_get_name(object_index) == "obj_Solido_movel" //tentar ver se "if object_get_name(id)" funciona
@@ -78,13 +80,29 @@ if global.GameStatus == "Jogando"
 			}//*/
 			#endregion
 			
-			x += _velh;
+			x -= 1;
 			if place_meeting(x,y, obj_Player)
 			{
 				obj_Player.estado = "morto";
-				break;
+				//break; ?
 			}
 		}
+		
+		//se o acumulador fez diferença, retirar essa parte dele
+		//se sobra algo (o acumulador não fez diferença), adiciona ao acumulador
+		
+		//CONTINUAR DAQUI
+		if floor(velh) < floor(velh + velh_acumulador) //se o acumulador fez alguma diferença
+		{
+			show_debug_message("acumulador fez diferença")
+			velh_acumulador -= 1 - frac(velh);
+		}
+		else if frac(velh) != 0
+		{
+			show_debug_message("sobrou: " + string(frac(velh)))
+			velh_acumulador += frac(velh)
+		}
+		
 	}
 }
 #endregion

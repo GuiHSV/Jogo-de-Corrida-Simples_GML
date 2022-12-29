@@ -2,7 +2,7 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 
 #macro GRAVIDADE .1
-#macro VELH_INICIAL -2
+#macro VELH_INICIAL 2
 
 
 function moveH_geral(){

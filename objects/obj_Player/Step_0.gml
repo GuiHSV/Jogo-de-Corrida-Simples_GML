@@ -4,8 +4,8 @@ if keyboard_check_pressed(ord("R")) estado = "morto";
 var/* right, left,*/ up, down, jump;
 //right = keyboard_check(ord("D"));
 //left = keyboard_check(ord("A"));
-up = keyboard_check(ord("W"));
-down = keyboard_check(ord("S")) or keyboard_check_pressed(vk_down); //or keyboard_check_pressed(mb_right);
+up = keyboard_check(ord("W")) or keyboard_check(vk_up) or keyboard_check(vk_space);
+down = keyboard_check(ord("S")) or keyboard_check(vk_down); //or keyboard_check_pressed(mb_right);
 jump = keyboard_check_pressed(ord("W")) or keyboard_check_pressed(vk_up) or keyboard_check_pressed(vk_space); // or keyboard_check_pressed(mb_left)
 
 chao = place_meeting(x,y+1, obj_Solido_base); //checkar apena um ponto abaixo
@@ -63,19 +63,31 @@ switch(estado)
 	{
 		if(sprite_index != spr_player_pulando) sprite_index = spr_player_pulando;
 		
+		//bug de não aparecer ultimo quadro, ver isso depois
+		
 		#region GRAVIDADE & ANIMAÇÃO
 		gravidade();
 		if(velv <= 0) velv -= .1 * up;
 		else velv += .2 * down;
 		
-		if(velv < -.5) and (image_index > 4) image_index = 1;
-		else if(-.5 < velv) and (velv < 0) image_index = 4;
-		else if(!chao) and (image_index > 8) image_index = 5;
+		if(velv < -.5) and (image_index > 4)
+		{
+			image_index = 1;
+		}
+		else if(-.5 < velv) and (velv < 0)
+		{
+			image_index = 4;
+		}
+		else if(!chao) and (image_index > 8)
+		{
+			image_index = 5;
+		}
 		#endregion
 		
 		//	Saída
-		if chao
+		if chao //and image_index > image_number -1
 		{
+			//show_message("TESTE")
 			image_index = 1;
 			estado = "correndo";
 		}

@@ -6,8 +6,7 @@
 
 
 #region CRINADO TERRENO (!)
-//	PODE:
-//	OU
+//	PODE OU
 //algoritmo que decide o começo, meio e final do obstáculo de terreno que pode criar outro
 //um obstáculo normal ou de terreno em cima dele (algoritmo recursivo limitado)
 //	OU
@@ -18,21 +17,21 @@
 if(obstaculo_delay < 1) //and false //and (pode criar um obstáculo)
 {
 	var spawn_x = camera_get_view_width(view_camera[0]) *1.2;
-	var spawn_y = camera_get_view_y(view_camera[0]) + 128;//incompleto
+	var spawn_y = camera_get_view_y(view_camera[0]) + 128; //+ nivel do chão
 	/*var obstaculo = */instance_create_layer(spawn_x, spawn_y, "Obstaculos", obj_Obstaculo)
 	//	Configurar obstáculo. (carregar obstáculos mais difíceis conforme o tempo passa)
 	//with(obstáculo){}
 	
-	var delay = irandom_range(2, 7) / 2
-	obstaculo_delay = room_speed * delay //* (modificador/2 + .5);
+	var delay = irandom_range(2, 6) / 2
+	obstaculo_delay = room_speed * delay
 	show_debug_message(string(delay) + "'s até o proximo obstáculo.")
 }
 #endregion
 
 
 
-#region MOVIMENTAÇÃO GLOBAL (***)
-{/*} Problema .1
+#region MOVIMENTAÇÃO GLOBAL (**)
+{/*} Problema .1 (Baixa Prioridade)
 	PROBLEMA: Provável que a colisão não seja visualmente perceptivel ou pareça
 	errada em altas velocidades pois, como os obstáculos se movem exatamente
 	vários pixels por frame, quando o obj_Player realizar o estado "morto" no
@@ -47,7 +46,7 @@ if(obstaculo_delay < 1) //and false //and (pode criar um obstáculo)
 	assim o player apenas sabe que houve uma colisão em vez de ver o momento 
 	levemente atrasado.
 */}
-{/*} Problema .2
+{/*} Problema .2 (Resolvido)
 	PROBLEMA: A mudança de velocidade é muito perceptível pois a velocidade
 	apenas conta a parte inteira.
 	SOLUÇÃO: É necessário implementar código que reaproveite a parte fracionada
@@ -55,13 +54,11 @@ if(obstaculo_delay < 1) //and false //and (pode criar um obstáculo)
 */}
 if global.GameStatus == "Jogando"
 {
-	with obj_Obstaculo
+	with obj_Obstaculo //Criar um objeto mais abstráto para tratar todos os que se movem?
 	{
+		//	Movimentação e colisão dos obstáculos
 		var velh = global.velhGlobal + self.velh;
-		//var abs_velh = abs(velh);
-		
-		//var _velh = sign(velh);
-		repeat(abs(velh + velh_acumulador))
+		repeat(velh + velh_acumulador)
 		{
 			#region INTERAÇÃO COM RAMPAS (!)
 			/*if object_get_name(object_index) == "obj_Solido_movel" //tentar ver se "if object_get_name(id)" funciona
@@ -84,25 +81,11 @@ if global.GameStatus == "Jogando"
 			if place_meeting(x,y, obj_Player)
 			{
 				obj_Player.estado = "morto";
-				//break; ?
 			}
 		}
-		
-		//se o acumulador fez diferença, retirar essa parte dele
-		//se sobra algo (o acumulador não fez diferença), adiciona ao acumulador
-		
-		//CONTINUAR DAQUI
-		if floor(velh) < floor(velh + velh_acumulador) //se o acumulador fez alguma diferença
-		{
-			show_debug_message("acumulador fez diferença")
-			velh_acumulador -= 1 - frac(velh);
-		}
-		else if frac(velh) != 0
-		{
-			show_debug_message("sobrou: " + string(frac(velh)))
-			velh_acumulador += frac(velh)
-		}
-		
+		//	Suavização da velocidade
+		if(floor(velh) < floor(velh + velh_acumulador)) velh_acumulador -= 1 - frac(velh);
+		else if(frac(velh) != 0) velh_acumulador += frac(velh);
 	}
 }
 #endregion

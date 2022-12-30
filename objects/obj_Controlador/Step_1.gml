@@ -6,7 +6,7 @@ if global.GameStatus == "Jogando"
 	{
 		tempo_seg++;
 		tempo_buffer = room_speed;
-		if(tempo_seg mod 5 == 0) multiplicador += .1; //balancear melhor futuramente
+		if(tempo_seg mod 5 == 0) multiplicador += .05; //balancear melhor futuramente
 	}
 	else tempo_buffer--;
 }

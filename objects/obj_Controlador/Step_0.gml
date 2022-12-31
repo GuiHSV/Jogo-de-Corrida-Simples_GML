@@ -6,23 +6,41 @@
 
 
 #region CRINADO TERRENO (!)
-//	PODE OU
-//algoritmo que decide o começo, meio e final do obstáculo de terreno que pode criar outro
-//um obstáculo normal ou de terreno em cima dele (algoritmo recursivo limitado)
-//	OU
-//elevar ou abaixar o nivel do terreno
+{/*}	RASCUNHO
+	Pode executar OU um algoritmo que decide o começo, meio e final do
+	obstáculo de terreno e que pode criar outro um obstáculo normal ou
+	de terreno em cima dele (algoritmo recursivo limitado, mais ou menos
+	3 vezes) OU elevar ou abaixar o nivel o terreno em uma vez.	
+*/}
 #endregion
 
 #region CRIANDO OBSTÁCULOS (*)
 if(obstaculo_delay < 1) //and false //and (pode criar um obstáculo)
 {
+	
+	{/*}	RASCUNHO
+		Algoritmo que escolhe aleatoriamente o obstáculo a ser gerádo,
+		levar em consideração o tempo de jogo para gerar obstáculos
+		mais difíceis.
+		
+		PROTÓTIPO:
+		se passou_de_algum_tempo_específico, então adiciona strings (nome do obstáculo) no array_de_strings
+		
+		se obstaculo_delay < 1
+			cria obstáculo no nivel do chão atual e fora da tela
+			var nome_obstáculo = choose(array_de_strings)
+			switch(nome_obstáculo)
+				configura obstáculo de acordo com a opção selecionada
+			define delay até próximo obstáculo (intervalo fica levemente menor conforme a velocidade aumenta)
+	*/}
+	
 	var spawn_x = camera_get_view_width(view_camera[0]) *1.2;
 	var spawn_y = camera_get_view_y(view_camera[0]) + 128; //+ nivel do chão
 	/*var obstaculo = */instance_create_layer(spawn_x, spawn_y, "Obstaculos", obj_Obstaculo)
 	//	Configurar obstáculo. (carregar obstáculos mais difíceis conforme o tempo passa)
 	//with(obstáculo){}
 	
-	var delay = irandom_range(2, 6) / 2
+	var delay = irandom_range(2, 6) / 2 //alterar para gerar um pouco mais rápido em velocidades maiores
 	obstaculo_delay = room_speed * delay
 	show_debug_message(string(delay) + "'s até o proximo obstáculo.")
 }
@@ -54,7 +72,7 @@ if(obstaculo_delay < 1) //and false //and (pode criar um obstáculo)
 */}
 if global.GameStatus == "Jogando"
 {
-	with obj_Obstaculo //Criar um objeto mais abstráto para tratar todos os que se movem?
+	with obj_Obstaculo //NOTA: Criar um objeto mais abstráto para tratar todos os que se movem?
 	{
 		//	Movimentação e colisão dos obstáculos
 		var velh = global.velhGlobal + self.velh;
@@ -83,7 +101,7 @@ if global.GameStatus == "Jogando"
 				obj_Player.estado = "morto";
 			}
 		}
-		//	Suavização da velocidade
+		//	Reaproveitamento da parte fracionada
 		if(floor(velh) < floor(velh + velh_acumulador)) velh_acumulador -= 1 - frac(velh);
 		else if(frac(velh) != 0) velh_acumulador += frac(velh);
 	}

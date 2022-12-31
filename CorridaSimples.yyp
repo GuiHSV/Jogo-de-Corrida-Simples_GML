@@ -16,6 +16,7 @@
     {"id":{"name":"spr_solido","path":"sprites/spr_solido/spr_solido.yy",},"order":4,},
     {"id":{"name":"spr_bolaFeno","path":"sprites/spr_bolaFeno/spr_bolaFeno.yy",},"order":4,},
     {"id":{"name":"spr_teste_pulando","path":"sprites/spr_teste_pulando/spr_teste_pulando.yy",},"order":3,},
+    {"id":{"name":"spr_parallax_base","path":"sprites/spr_parallax_base/spr_parallax_base.yy",},"order":6,},
     {"id":{"name":"obj_Solido_base","path":"objects/obj_Solido_base/obj_Solido_base.yy",},"order":2,},
     {"id":{"name":"spr_player_parado","path":"sprites/spr_player_parado/spr_player_parado.yy",},"order":0,},
     {"id":{"name":"spr_cacto_G2","path":"sprites/spr_cacto_G2/spr_cacto_G2.yy",},"order":3,},

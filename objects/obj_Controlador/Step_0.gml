@@ -34,8 +34,12 @@ if(obstaculo_delay < 1) //and false //and (pode criar um obstáculo)
 			define delay até próximo obstáculo (intervalo fica levemente menor conforme a velocidade aumenta)
 	*/}
 	
-	var spawn_x = camera_get_view_width(view_camera[0]) *1.2;
-	var spawn_y = camera_get_view_y(view_camera[0]) + 128; //+ nivel do chão
+	
+	var spawn_x = room_width * 1.2;
+	var spawn_y = room_height - global.nivelChao;
+	
+	//obstaculo = ["cacto_P", "cacto_G", "bola_feno"];
+	
 	/*var obstaculo = */instance_create_layer(spawn_x, spawn_y, "Obstaculos", obj_Obstaculo)
 	//	Configurar obstáculo. (carregar obstáculos mais difíceis conforme o tempo passa)
 	//with(obstáculo){}
@@ -48,7 +52,7 @@ if(obstaculo_delay < 1) //and false //and (pode criar um obstáculo)
 
 
 
-#region MOVIMENTAÇÃO GLOBAL (**)
+#region MOVIMENTAÇÃO GLOBAL (**) //<=====================================
 {/*} Problema .1 (Baixa Prioridade)
 	PROBLEMA: Provável que a colisão não seja visualmente perceptivel ou pareça
 	errada em altas velocidades pois, como os obstáculos se movem exatamente
@@ -64,19 +68,13 @@ if(obstaculo_delay < 1) //and false //and (pode criar um obstáculo)
 	assim o player apenas sabe que houve uma colisão em vez de ver o momento 
 	levemente atrasado.
 */}
-{/*} Problema .2 (Resolvido)
-	PROBLEMA: A mudança de velocidade é muito perceptível pois a velocidade
-	apenas conta a parte inteira.
-	SOLUÇÃO: É necessário implementar código que reaproveite a parte fracionada
-	de "velh".
-*/}
 if global.GameStatus == "Jogando"
 {
-	with obj_Obstaculo //NOTA: Criar um objeto mais abstráto para tratar todos os que se movem?
+	with obj_Movel //NOTA: Devo criar um objeto mais abstráto para tratar todos os que se movem? Provalvel
 	{
-		//	Movimentação e colisão dos obstáculos
-		var velh = global.velhGlobal + self.velh;
-		repeat(velh + velh_acumulador)
+		#region Movimentação & Colisão
+		var velh = global.velhGlobal + other.velh_acumulador;
+		repeat(velh + self.velh)
 		{
 			#region INTERAÇÃO COM RAMPAS (!)
 			/*if object_get_name(object_index) == "obj_Solido_movel" //tentar ver se "if object_get_name(id)" funciona
@@ -96,14 +94,16 @@ if global.GameStatus == "Jogando"
 			#endregion
 			
 			x -= 1;
-			if place_meeting(x,y, obj_Player)
-			{
-				obj_Player.estado = "morto";
-			}
+			if(place_meeting(x,y, obj_Player)) obj_Player.estado = "morto";
+			
+			if(object_get_name(object_index) == "obj_Controlador") and (abs(x) == room_width) x = 0; 
 		}
-		//	Reaproveitamento da parte fracionada
-		if(floor(velh) < floor(velh + velh_acumulador)) velh_acumulador -= 1 - frac(velh);
-		else if(frac(velh) != 0) velh_acumulador += frac(velh);
+		#endregion
 	}
+	
+	//	Reaproveitamento da parte fracionada
+	var velh = global.velhGlobal;
+	if(floor(velh) < floor(velh + velh_acumulador)) velh_acumulador -= 1 - frac(velh);
+	else if(frac(velh) != 0) velh_acumulador += frac(velh);
 }
 #endregion

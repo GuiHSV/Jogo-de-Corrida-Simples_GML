@@ -4,16 +4,15 @@
 //massa = ?;
 
 //	Movimentação
-velh = 0;
-velh_acumulador = .0;
+velh = 0; //NECESSÁRIO QUE SEJA INTEIRO PARA NÃO INTERFERIR NO MOVIMENTAÇÃO GOLBAL
 
-// Aparência
+// Aparência/*
 if(sprite_index == spr_obstaculo_teste)
 {
-	{/*} Incompleto
-	mudar para isso ser decidido pelo controlador usando parametros como
-	velocidade global e probabilidade.
-	*/}
+	{//}	Incompleto
+	//mudar para isso ser decidido pelo controlador usando parametros como
+	//velocidade global e probabilidade.
+	}
 	var n = irandom(2);
 	switch(n)
 	{
@@ -27,7 +26,7 @@ if(sprite_index == spr_obstaculo_teste)
 			sprite_index = spr_cacto_G2;
 		break;
 	}
-}
+}//*/
 #endregion
 
 

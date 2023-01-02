@@ -2,6 +2,7 @@
 #region	VARIÁVEIS
 //	Propriedades Globais
 global.GameStatus = "Iniciado";
+global.nivelChao = 60; //32 + 28
 //bioma = "deserto";
 {/*}
 PROPOSTAS DE BIOMAS
@@ -27,10 +28,11 @@ PROPOSTAS DE BIOMAS
 	Templo_grego
 */}
 
-//	Velocidade Global
+//	Movimentação Global
 multiplicador = 1;
+velh_acumulador = 0;
 
-//	Buffers
+//	Temporizador
 tempo_seg = 0;
 tempo_buffer = room_speed;
 
@@ -44,7 +46,6 @@ obstaculo_delay = 3 * room_speed;
 var spawn_x = camera_get_view_x(view_camera[0]) + 48;
 var spawn_y = camera_get_view_y(view_camera[0]) + 128;
 if(!instance_exists(obj_Player)) /*id_Player =*/ instance_create_layer(spawn_x, spawn_y, "Player", obj_Player);
-//else show_message("Há mais de um obj do player! Algo está errado...");
 
 
 

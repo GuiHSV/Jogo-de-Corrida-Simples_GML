@@ -10,7 +10,7 @@
 
 
 /*function alinhamento_vertical(){
-	alinha os objetos verticalmnete quando necessário
+	alinha os objetos verticalmnete quando necessário (quando o nivel do chão mudar)
 }//*/
 
 function gravidade(){ //será usado por: player, bola de feno, outroPassaro e outras coisas

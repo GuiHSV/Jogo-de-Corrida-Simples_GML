@@ -1,12 +1,14 @@
 
+
+
 #region VARIVÁVEIS
 //	Propriedades
 //massa = ?;
 
 //	Movimentação
-velh = 0; //NECESSÁRIO QUE SEJA INTEIRO PARA NÃO INTERFERIR NO MOVIMENTAÇÃO GOLBAL
 
-// Aparência/*
+// Aparência
+/*
 if(sprite_index == spr_obstaculo_teste)
 {
 	{//}	Incompleto
@@ -17,13 +19,13 @@ if(sprite_index == spr_obstaculo_teste)
 	switch(n)
 	{
 		case 0:
-			sprite_index = spr_cacto_P1;
+			sprite_index = spr_obst_P1_deserto;
 		break;
 		case 1:
 			sprite_index = spr_cacto_G1;
 		break;
 		case 2:
-			sprite_index = spr_cacto_G2;
+			sprite_index = spr_obst_G1_deserto;
 		break;
 	}
 }//*/

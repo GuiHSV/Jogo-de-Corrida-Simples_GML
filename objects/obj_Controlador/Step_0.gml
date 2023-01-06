@@ -4,55 +4,38 @@
 #endregion
 
 
-
-#region CRINADO TERRENO (!)
+#region OPERAÇÕES
+//algoritmo de terreno
 {/*}	RASCUNHO
-	Pode executar OU um algoritmo que decide o começo, meio e final do
+	Pode ser:
+	1. um algoritmo que decide o começo, meio e final do
 	obstáculo de terreno e que pode criar outro um obstáculo normal ou
 	de terreno em cima dele (algoritmo recursivo limitado, mais ou menos
-	3 vezes) OU elevar ou abaixar o nivel o terreno em uma vez.	
+	3 vezes)
+	2. elevar ou abaixar o nivel o terreno em uma vez.	
 */}
-#endregion
 
-#region CRIANDO OBSTÁCULOS (*)
-if(obstaculo_delay < 1) //and false //and (pode criar um obstáculo)
-{
-	
-	{/*}	RASCUNHO
-		Algoritmo que escolhe aleatoriamente o obstáculo a ser gerádo,
-		levar em consideração o tempo de jogo para gerar obstáculos
-		mais difíceis.
+if(obstaculo_intervalo_t < 1) gerar_obstaculo();
+{/*}	RASCUNHO
+	Algoritmo que escolhe aleatoriamente o obstáculo a ser gerádo,
+	levar em consideração o tempo de jogo para gerar obstáculos
+	mais difíceis.
 		
-		PROTÓTIPO:
-		se passou_de_algum_tempo_específico, então adiciona strings (nome do obstáculo) no array_de_strings
+	PROTÓTIPO:
+	se passou_de_algum_tempo_específico, então adiciona strings (nome do obstáculo) no array_de_strings
 		
-		se obstaculo_delay < 1
-			cria obstáculo no nivel do chão atual e fora da tela
-			var nome_obstáculo = choose(array_de_strings)
-			switch(nome_obstáculo)
-				configura obstáculo de acordo com a opção selecionada
-			define delay até próximo obstáculo (intervalo fica levemente menor conforme a velocidade aumenta)
-	*/}
-	
-	
-	var spawn_x = room_width * 1.2;
-	var spawn_y = room_height - global.nivelChao;
-	
-	//obstaculo = ["cacto_P", "cacto_G", "bola_feno"];
-	
-	/*var obstaculo = */instance_create_layer(spawn_x, spawn_y, "Obstaculos", obj_Obstaculo)
-	//	Configurar obstáculo. (carregar obstáculos mais difíceis conforme o tempo passa)
-	//with(obstáculo){}
-	
-	var delay = irandom_range(2, 6) / 2 //alterar para gerar um pouco mais rápido em velocidades maiores
-	obstaculo_delay = room_speed * delay
-	show_debug_message(string(delay) + "'s até o proximo obstáculo.")
-}
+	se obstaculo_intervalo_t < 1
+		cria obstáculo no nivel do chão atual e fora da tela
+		var nome_obstáculo = choose(array_de_strings)
+		switch(nome_obstáculo)
+			configura obstáculo de acordo com a opção selecionada
+		define delay até próximo obstáculo (intervalo fica levemente menor conforme a velocidade aumenta)
+*/}
+
 #endregion
 
 
-
-#region MOVIMENTAÇÃO GLOBAL (**) //<=====================================
+#region MOVIMENTAÇÃO GLOBAL (*)
 {/*} Problema .1 (Baixa Prioridade)
 	PROBLEMA: Provável que a colisão não seja visualmente perceptivel ou pareça
 	errada em altas velocidades pois, como os obstáculos se movem exatamente
@@ -69,7 +52,33 @@ if(obstaculo_delay < 1) //and false //and (pode criar um obstáculo)
 	levemente atrasado.
 */}
 if global.GameStatus == "Jogando"
-{
+{	
+	var velh = global.velhGlobal + other.velh_acumulador;
+	repeat(velh)
+	{
+		with obj_Movel
+		{
+			#region INTERAÇÃO COM RAMPAS (!)
+			#endregion
+			
+			x -= 1;
+			if self.velh != 0
+			{
+				x -= self.velh;
+				self.velh -= sign(self.velh)
+			}
+		
+			if(place_meeting(x,y, obj_Player)) obj_Player.estado = "morto";
+		}
+		if(obj_Player.estado == "morto") break;
+	}
+		
+	//	Reaproveitamento da parte fracionada
+	var velh = global.velhGlobal;
+	if(floor(velh) < floor(velh + velh_acumulador)) velh_acumulador -= 1 - frac(velh);
+	else if(frac(velh) != 0) velh_acumulador += frac(velh);
+	
+	{/*} ...
 	with obj_Movel //NOTA: Devo criar um objeto mais abstráto para tratar todos os que se movem? Provalvel
 	{
 		#region Movimentação & Colisão
@@ -90,7 +99,7 @@ if global.GameStatus == "Jogando"
 				{
 					y++;
 				}
-			}//*/
+			}//* /
 			#endregion
 			
 			x -= 1;
@@ -105,5 +114,6 @@ if global.GameStatus == "Jogando"
 	var velh = global.velhGlobal;
 	if(floor(velh) < floor(velh + velh_acumulador)) velh_acumulador -= 1 - frac(velh);
 	else if(frac(velh) != 0) velh_acumulador += frac(velh);
+	*/}
 }
 #endregion

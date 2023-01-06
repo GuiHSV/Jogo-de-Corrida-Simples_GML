@@ -3,8 +3,9 @@ var view_x = camera_get_view_x(view_camera[0]);
 var view_y = camera_get_view_y(view_camera[0]);
 
 draw_set_color(c_black);
-draw_text(view_x+10,view_y, "seg: " + string(tempo_seg), "  |  buffer: " + string(tempo_buffer))
-draw_text(view_x+10,view_y+15, "velocidade: + string(global.velhGlobal)" + " | multiplicador: " + string(multiplicador))
+draw_text(view_x+10,view_y, "seg: " + string(tempo_seg) + "  |  buffer: " + string(tempo_fps))
+draw_text(view_x+10,view_y+15, "velocidade: " + string(global.velhGlobal) + " | multiplicador: " + string(multiplicador))
+draw_text(view_x+10,room_height-15, string(obstaculo_intervalo_t))
 draw_set_color(-1);
 
 #region DESENHA PONTUAÇÃO (!)

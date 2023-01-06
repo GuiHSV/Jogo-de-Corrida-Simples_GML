@@ -1,16 +1,18 @@
+randomize();
 
 #region	VARIÁVEIS
-//	Propriedades Globais
+	//	Propriedades Globais
 global.GameStatus = "Iniciado";
 {/*}	global.GameStatus
 	"Iniciado"
 	"Jogando"
 	"Pausado"
 	"FimDeJogo"
+	"Transição"
 */}
-global.nivelChao = 60; //32 + 28
-//bioma = "deserto";
-{/*}	PROPOSTAS DE BIOMAS
+nivelChao = 60; //32 + 28
+bioma = "_deserto";
+{/*}	Biomas
 	Bioma:
 		*_sub_bioma (..._variação)
 			obstáculos (tipo e frequência/variação)
@@ -33,21 +35,18 @@ global.nivelChao = 60; //32 + 28
 	Templo_grego
 */}
 
-//	Movimentação Global
+	//	Movimentação Global
 multiplicador = 1;
 velh_acumulador = 0;
 
-//	Temporizador
+	//	Temporizador
 tempo_seg = 0;
-tempo_buffer = room_speed;
+tempo_fps = room_speed;
 
-//	Terreno
-obstaculo_tipo = ["obst_P", "obst_P", "obst_G"];
-//obst_P - obstáculo pequeno | obst_G - obstáculo grande | obst_M - obstáculo móvel
-obstaculo_variacao = [1];
-//1 - comprimento curto | 2 - comp. médio | 3 - comp. longo
-obstaculo_delay = 3 * room_speed;
-//terreno_delay = 10 * room_speed;
+	//	Geração de obstáculos
+//obstaculo_asser_buffer = noone;
+obstaculo_intervalo_t = 2 * room_speed;
+
 
 
 #endregion

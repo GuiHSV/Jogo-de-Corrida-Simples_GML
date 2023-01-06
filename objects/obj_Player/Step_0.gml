@@ -8,7 +8,7 @@ up = keyboard_check(ord("W")) or keyboard_check(vk_up) or keyboard_check(vk_spac
 down = keyboard_check(ord("S")) or keyboard_check(vk_down); //or keyboard_check_pressed(mb_right);
 jump = keyboard_check_pressed(ord("W")) or keyboard_check_pressed(vk_up) or keyboard_check_pressed(vk_space); // or keyboard_check_pressed(mb_left)
 
-chao = place_meeting(x,y+1, obj_Solido_base); //checkar apena um ponto abaixo
+chao = collision_line(x-8,y+1, x+2,y+1, obj_Solido_base, false, true); //place_meeting(x,y+1, obj_Solido_base);
 #endregion
 
 #region GERENCIADOR
@@ -58,7 +58,7 @@ switch(estado)
 	}
 	#endregion
 	
-	#region PULANDO
+	#region PULANDO (*)
 	case "pulando":
 	{
 		if(sprite_index != spr_player_pulando) sprite_index = spr_player_pulando;
@@ -123,7 +123,8 @@ switch(estado)
 var _velv = sign(velv);
 repeat(abs(velv))
 {
-	if place_meeting(x,y+_velv, obj_Solido_base)
+	var _chao = collision_line(x-8,y+1, x+2,y+1, obj_Solido_base, false, true);
+	if collision_line(x-8,y+_velv, x+2,y+_velv, obj_Solido_base, false, true)
 	{
 		velv = 0;
 		break;

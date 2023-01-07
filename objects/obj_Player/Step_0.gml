@@ -59,11 +59,12 @@ switch(estado)
 	#endregion
 	
 	#region PULANDO (*)
+	//Necessário balanceamento
 	case "pulando":
 	{
 		if(sprite_index != spr_player_pulando) sprite_index = spr_player_pulando;
 		
-		//bug de não aparecer ultimo quadro, ver isso depois
+		//bug no último quadro, ver isso depois. talvez seja necessário mudar a troca de sprites.
 		
 		#region GRAVIDADE & ANIMAÇÃO
 		gravidade();
@@ -123,7 +124,6 @@ switch(estado)
 var _velv = sign(velv);
 repeat(abs(velv))
 {
-	var _chao = collision_line(x-8,y+1, x+2,y+1, obj_Solido_base, false, true);
 	if collision_line(x-8,y+_velv, x+2,y+_velv, obj_Solido_base, false, true)
 	{
 		velv = 0;

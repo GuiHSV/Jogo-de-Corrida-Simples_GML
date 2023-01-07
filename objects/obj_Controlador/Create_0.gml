@@ -44,8 +44,8 @@ tempo_seg = 0;
 tempo_fps = room_speed;
 
 	//	Geração de obstáculos
-//obstaculo_asser_buffer = noone;
-obstaculo_intervalo_t = 2 * room_speed;
+obstaculo_asset_buffer = noone;
+obstaculo_intervalo_t = 0; //2 * room_speed;
 
 
 

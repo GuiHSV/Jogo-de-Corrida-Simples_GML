@@ -1,1 +1,1 @@
-sprite_index = spr_obst_G1_deserto;
+//sprite_index = spr_obst_G1_deserto;

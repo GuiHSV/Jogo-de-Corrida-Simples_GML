@@ -1,16 +1,19 @@
 
 #region VARIÁVEIS
-//	Propriedades
+	//	Propriedades
 estado = "parado";
 massa = 3;
 
-//	Movimentação
+	//	Movimentação
 velv = 0;
 //velh auxiliar. serve para o jogador conseguir alterar levemente a velocidade global
 
-//	Auxiliares
+	//	Auxiliares
 jump_buffer = 0;
 
 #endregion
 
-
+colisao_solo = function()
+{
+	
+}

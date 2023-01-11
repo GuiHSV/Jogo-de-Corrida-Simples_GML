@@ -4,12 +4,10 @@
 #region VARIVÁVEIS
 //sprite_index = spr_obst_M_deserto
 if sprite_index == spr_obst_M_deserto
-{
-	show_message("é um objeto móvel")
-	
+{	
 		//	Propriedades
 	isMovel = true;
-	massa = 1; //choose(1, 2)
+	//massa = 1; //choose(1, 2)
 	angulo = 0;
 	
 		//	Movimentação
@@ -24,7 +22,11 @@ else isMovel = false;
 #endregion
 
 
-colisao_solo = function()
+colisao_solo = function(_direcao)
 {
-	return false;
+	var _y = y + (sprite_height/2 * _direcao)
+	
+	draw_set_color(c_red);
+	draw_point(x, _y); //y+sprite_height+_direcao)
+	draw_set_color(-1);
 }

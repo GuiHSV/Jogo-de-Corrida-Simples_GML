@@ -1,33 +1,62 @@
 
-var view_x = camera_get_view_x(view_camera[0]);
-var view_y = camera_get_view_y(view_camera[0]);
+{//} informações extra
+	
+	var view_x = camera_get_view_x(view_camera[0]);
+	var view_y = camera_get_view_y(view_camera[0]);
 
-draw_set_color(c_black);
-//draw_text(view_x+10,view_y, "seg: " + string(tempo_seg) + "  |  buffer: " + string(tempo_fps))
-//draw_text(view_x+10,view_y+15, "velocidade: " + string(global.velhGlobal) + " | multiplicador: " + string(multiplicador))
-//draw_text(view_x+10,room_height-15, string(obstaculo_intervalo_t))
-draw_set_color(-1);
+	draw_set_color(c_black);
+	draw_text(view_x+10,view_y, "seg: " + string(tempo_seg) + "  |  buffer: " + string(tempo_fps))
+	draw_text(view_x+10,view_y+15, "velocidade: " + string(global.velhGlobal) + " | multiplicador: " + string(multiplicador))
+	draw_text(view_x+10,room_height-48, string(obstaculo_intervalo_t))
+	draw_set_color(-1);
+}
 
-#region DESENHA PONTUAÇÃO (!)
-//desenha pontuação
 
-{/*} NOTA:
-	futuramente, caso seja implementado algum chefe, o número da pontuação
-	será substituído pelo tempo até a luta acabar, que será contado da mesma
-	forma que a pontuação, porém de forma decrescente. Quando o tempo chegar
-	a zero a pontuação voltará a ser contada normalmente, mas com o jogador
-	ganhando uma pontuação extra por ter sobrevivido ao chefe.
-*/}
-#endregion
 
-#region DESENHA EXTRA (!)
+#region DESENHA HUD (!)
 //Desenha botão de iniciar quando player estiver parado
 
 //Desenha tela de pause quando pausado
 
 //Desenha tela de game over/restart quando jogador morrer
 
+desenhar_pontuacao();
+switch(global.GameStatus)
+{
+	case "Iniciado":
+	{
+		//melhor pontução
+		break;
+	}
+	
+	case "Jogando":
+	{
+		//pontuação e talvez a velocidade
+		break;
+	}
+	
+	case "Pausado":
+	{
+		//pontuação e frase "PAUSE" piscando simultaneamente
+		desenhar_texto(true, "Pause")
+		
+		break;
+	}
+	
+	case "FimDeJogo":
+	{
+		//pontuação piscando e "GAME OVER" na tela
+		desenhar_texto(false, "Game Over")
+		
+		break;
+	}
+	
+	case "Transição":
+	{
+		//mesma coisa do "Jogando"
+		break;
+	}
+}
 #endregion
-
 
 

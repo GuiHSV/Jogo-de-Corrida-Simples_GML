@@ -1,6 +1,4 @@
 
-//if(global.GameStatus) moveH_geral();
-
 if isMovel
 {
 	velh = velh_inicial;
@@ -9,11 +7,13 @@ if isMovel
 	else angulo = 0;
 	image_angle = angulo;
 	
-	//if(colisao_solo()) velv = vel_jump;
+	/**/ colisao_solo(1); //*/ if(colisao_solo(sign(1))) velv = vel_jump;
+	//else gravidade()
 	
-	movimentacao_vertical();
+	//movimentacao_vertical();
 }
 //definir o resto do comportamento do obstáculo quando ele for móvel
+
 
 if x + sprite_width/2 < camera_get_view_x(view_camera[0])
 {

@@ -1,17 +1,19 @@
 if keyboard_check_pressed(ord("R")) estado = "morto";
 
 #region CONTROLES & SENSORES
-var/* right, left,*/ up, down, jump;
-//right = keyboard_check(ord("D"));
-//left = keyboard_check(ord("A"));
-up = keyboard_check(ord("W")) or keyboard_check(vk_up) or keyboard_check(vk_space);
-down = keyboard_check(ord("S")) or keyboard_check(vk_down); //or keyboard_check_pressed(mb_right);
-jump = keyboard_check_pressed(ord("W")) or keyboard_check_pressed(vk_up) or keyboard_check_pressed(vk_space); // or keyboard_check_pressed(mb_left)
+var /*right, left,*/ up, down, jump;
+//right = global.GameStatus == "Jogando" and (keyboard_check(ord("D") or ...);
+//left = global.GameStatus == "Jogando" and (keyboard_check(ord("A") or ...);
+up = global.GameStatus == "Jogando" and (keyboard_check(ord("W")) or keyboard_check(vk_up) or keyboard_check(vk_space));
+down = global.GameStatus == "Jogando" and (keyboard_check(ord("S")) or keyboard_check(vk_down));
+jump = keyboard_check_pressed(ord("W")) or keyboard_check_pressed(vk_up) or keyboard_check_pressed(vk_space);
 
-chao = collision_line(x-8,y+1, x+2,y+1, obj_Solido_base, false, true); //place_meeting(x,y+1, obj_Solido_base);
+chao = colisao_solo(1);
 #endregion
 
 #region GERENCIADOR
+if(global.GameStatus = "FimDeJogo") estado = "morto";
+
 if(global.GameStatus == "Iniciado" or global.GameStatus == "Jogando") image_speed = 1;
 else image_speed = 0;
 
@@ -60,14 +62,14 @@ switch(estado)
 	
 	#region PULANDO (*)
 	//Necessário balanceamento
+	//bug que substitui o último quadro pelo primeiro, ver isso depois. talvez seja necessário mudar a troca de sprites.
 	case "pulando":
 	{
 		if(sprite_index != spr_player_pulando) sprite_index = spr_player_pulando;
 		
-		//bug no último quadro, ver isso depois. talvez seja necessário mudar a troca de sprites.
-		
 		#region GRAVIDADE & ANIMAÇÃO
 		gravidade();
+		
 		if(velv <= 0) velv -= .1 * up;
 		else velv += .2 * down;
 		
@@ -99,7 +101,6 @@ switch(estado)
 	#region MORTO (*)
 	case "morto":
 	{
-		global.GameStatus = "FimDeJogo";
 		if sprite_index != spr_player_morto
 		{
 			var abaixado = (sprite_index == spr_player_abaixado);
@@ -108,11 +109,6 @@ switch(estado)
 			if(abaixado) image_index += 5;
 			else if(pulando) image_index += 10;
 		}
-		else
-		{
-			show_message("MORREU!");
-			game_restart();
-		}
 		break;
 	}
 	#endregion
@@ -120,16 +116,4 @@ switch(estado)
 #endregion
 
 
-#region MOVIMENTAÇÃO VERTICAL
-var _velv = sign(velv);
-repeat(abs(velv))
-{
-	if collision_line(x-8,y+_velv, x+2,y+_velv, obj_Solido_base, false, true)
-	{
-		velv = 0;
-		break;
-	}
-	
-	y += _velv;
-}
-#endregion
+if(global.GameStatus == "Jogando") movimentacao_vertical();

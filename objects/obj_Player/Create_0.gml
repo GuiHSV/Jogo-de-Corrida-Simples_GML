@@ -11,9 +11,13 @@ velv = 0;
 	//	Auxiliares
 jump_buffer = 0;
 
+//...
+
 #endregion
 
-colisao_solo = function()
+
+colisao_solo = function(_direcao)
 {
-	
+	var _y = y + _direcao;
+	return collision_line(x-8,_y, x+2,_y, obj_Solido_base, false, true);
 }

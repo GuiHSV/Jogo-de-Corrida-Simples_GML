@@ -37,19 +37,24 @@ bioma = "_deserto";
 pontuacao = 0;
 
 	//	Movimentação Global
-multiplicador = 1;
+multiplicador = 0;
 velh_acumulador = 0;
 
 	//	Temporizador
 tempo_seg = 0;
-tempo_fps = room_speed;
+contador_fps = room_speed;
 
 	//	Geração de obstáculos
 obstaculo_asset_buffer = noone;
-obstaculo_intervalo_t = 0;
+obstaculo_intervalo_t = 1;
 
 	//	Extras
 tempo_piscar_hud = 0;
+{/*}
+contador de tempo para "game over" pro jogo não acabar
+recomeçando instantaneamente quando você morrer e estiver
+com o botão apertado
+*/}
 
 #endregion
 
@@ -59,10 +64,11 @@ var spawn_y = camera_get_view_y(view_camera[0]) + 128;
 if(!instance_exists(obj_Player)) instance_create_layer(spawn_x, spawn_y, "Player", obj_Player);
 
 
+
 #region DESENHAR PONTUAÇÃO
 {/*} NOTA:
-	Desenhar a melhor pontuação (caso haja) em cima da pontuação aual
-	Futuramente, caso seja implementado algum chefe, o número da pontuação
+	Desenhar a melhor pontuação (caso haja) em cima da pontuação atual
+	futuramente. Caso seja implementado algum chefe, o número da pontuação
 	será substituído pelo tempo até a luta acabar, que será contado da mesma
 	forma que a pontuação, porém de forma decrescente. Quando o tempo chegar
 	a zero a pontuação voltará a ser contada normalmente *de onde parou*, mas
@@ -70,7 +76,7 @@ if(!instance_exists(obj_Player)) instance_create_layer(spawn_x, spawn_y, "Player
 */}
 desenhar_pontuacao = function()
 {
-	if tempo_piscar_hud < room_speed/2
+	if global.GameStatus == "Iniciado" or tempo_piscar_hud < room_speed/2
 	{
 		{//}	Ajustes
 			var text_x = room_width;
@@ -112,22 +118,22 @@ desenhar_pontuacao = function()
 #endregion
 
 
-#region DESENHAR
-desenhar_texto = function(_isPiscando, _texto)
+#region DESENHAR TEXTO PRINCIPAL
+desenhar_texto = function(_texto, _isPiscando, _noMeio, _escala, _cor1, _cor2)
 {
 	if !_isPiscando or tempo_piscar_hud < room_speed/2
 	{
-		draw_set_color(c_black)
 		draw_set_font(fonte_principal)
 		draw_set_halign(fa_center)
 		draw_set_valign(fa_middle)
+		var _y = camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0])/2;
+		if(!_noMeio) _y += camera_get_view_height(view_camera[0])/2 - 20;
 		
-		draw_text(room_width/2, room_height/2, _texto)
+		draw_text_transformed_color(room_width/2, _y, _texto, _escala, _escala, 0, _cor1, _cor1, _cor2, _cor2, 1);
 		
 		draw_set_halign(-1)
 		draw_set_valign(-1)
 		draw_set_font(-1)
-		draw_set_color(-1)
 	}
 }
 #endregion

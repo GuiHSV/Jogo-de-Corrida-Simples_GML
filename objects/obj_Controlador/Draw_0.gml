@@ -5,8 +5,8 @@
 	var view_y = camera_get_view_y(view_camera[0]);
 
 	draw_set_color(c_black);
-	draw_text(view_x+10,view_y, "seg: " + string(tempo_seg) + "  |  buffer: " + string(tempo_fps))
-	draw_text(view_x+10,view_y+15, "velocidade: " + string(global.velhGlobal) + " | multiplicador: " + string(multiplicador))
+	draw_text(view_x+10,view_y,  "veloc(" +  string(global.velhGlobal) + ") mult(" + string(multiplicador) + ") tempo(" + string(tempo_seg) + " - " + string(contador_fps) + ")")
+	//draw_text(view_x+10,view_y+15, "velocidade: " + string(global.velhGlobal) + " | multiplicador: " + string(multiplicador))
 	draw_text(view_x+10,room_height-48, string(obstaculo_intervalo_t))
 	draw_set_color(-1);
 }
@@ -25,7 +25,15 @@ switch(global.GameStatus)
 {
 	case "Iniciado":
 	{
+		desenhar_texto("Precione SPACE para iniciar", true, false, .5, c_gray, c_black)
+		
 		//melhor pontução
+		
+		//versão
+		
+		//configurações
+		
+		//título
 		break;
 	}
 	
@@ -38,7 +46,7 @@ switch(global.GameStatus)
 	case "Pausado":
 	{
 		//pontuação e frase "PAUSE" piscando simultaneamente
-		desenhar_texto(true, "Pause")
+		desenhar_texto("Pause", true, true,  1, c_white, c_ltgray)
 		
 		break;
 	}
@@ -46,7 +54,7 @@ switch(global.GameStatus)
 	case "FimDeJogo":
 	{
 		//pontuação piscando e "GAME OVER" na tela
-		desenhar_texto(false, "Game Over")
+		desenhar_texto("Game Over", false, true, 1, c_dkgray, c_black)
 		
 		break;
 	}

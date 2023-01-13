@@ -1,32 +1,35 @@
 
 #region TEMPORIZADOR (*)
-if global.GameStatus == "Jogando"
+if global.GameStatus == "Jogando" and multiplicador >= 1
 {
-	if tempo_fps == 0
+	if contador_fps == 0
 	{
 		tempo_seg++;
-		tempo_fps = room_speed;
+		contador_fps = room_speed;
 		if(tempo_seg mod 2 == 0) multiplicador += .05; //balancear melhor a adição do multiplicador
-		if(tempo_fps mod abs(room_speed/10) == 0) pontuacao++;
+		if(contador_fps mod abs(room_speed/10) == 0) pontuacao++;
 	}
-	else tempo_fps--;
+	else contador_fps--;
 	
-	if(tempo_fps mod abs(room_speed/10) == 0) pontuacao++;
+	if(contador_fps mod abs(room_speed/10) == 0) pontuacao++;
 }
 #endregion
 
 
 #region GERENCIADOR DE VARIÁVEIS
 global.velhGlobal = VELH_INICIAL * multiplicador; // + velocidade_auxiliar do player;
+if(global.GameStatus == "Jogando") and (multiplicador < 1) multiplicador += .05;
 
-if(global.GameStatus == "Jogando") and (obstaculo_intervalo_t > 0) obstaculo_intervalo_t--;
-
-if global.GameStatus == "Pausado" or global.GameStatus == "FimDeJogo"
+if global.GameStatus == "Jogando" and multiplicador >= 1
+{
+	if(obstaculo_intervalo_t > 0) obstaculo_intervalo_t--;
+	tempo_piscar_hud = 0;
+}
+else
 {
 	if(tempo_piscar_hud > 0) tempo_piscar_hud -= 2;
 	else tempo_piscar_hud = room_speed;
 }
-else tempo_piscar_hud = 0;
 //...
 
 #endregion

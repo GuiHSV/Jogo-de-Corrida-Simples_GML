@@ -1,4 +1,3 @@
-if keyboard_check_pressed(ord("R")) estado = "morto";
 
 #region CONTROLES & SENSORES
 var /*right, left,*/ up, down, jump;
@@ -33,7 +32,7 @@ switch(estado)
 		if(sprite_index != spr_player_parado) sprite_index = spr_player_parado;
 		
 		//	Saída
-		if keyboard_check_pressed(vk_anykey) //alterar quando for implementar os botões de menu e outras coisas
+		if keyboard_check_pressed(vk_space) //alterar quando for implementar os botões de menu e outras coisas
 		{
 			global.GameStatus = "Jogando";
 			image_index = 0;
@@ -77,20 +76,24 @@ switch(estado)
 		{
 			image_index = 1;
 		}
-		else if(-.5 < velv) and (velv < 0)
+		else if(-.5 < velv) and (velv < 0) and (!chao)
 		{
 			image_index = 4;
 		}
-		else if(!chao) and (image_index > 8)
+		else if(!chao) and (image_index > 8) //else if(velv > 0) and (image_index > 8)
 		{
 			image_index = 5;
 		}
+		/*else if(chao) and (image_index < 8)
+		{
+			image_index = 8
+		}
+		*/
 		#endregion
 		
 		//	Saída
-		if chao //and image_index > image_number -1
+		if chao //and image_index > 9
 		{
-			//show_message("TESTE")
 			image_index = 1;
 			estado = "correndo";
 		}

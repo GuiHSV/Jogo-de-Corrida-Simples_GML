@@ -4,21 +4,21 @@
 #endregion
 
 
-#region OPERAÇÕES
-//sistema de pause
-{/*} RASCUNHO
-	quando se preciona "Esc" quando o "global.GameStatus" for igual
-	a "Jogando" ele troca para "Pausado" e vice-versa. Com isso
-	a movimentação global é parada junto da contagem de todos os
-	buffers.
-*/}
+#region COMANDOS
+//Pause
 if(keyboard_check_pressed(vk_escape))
 {
 	if(global.GameStatus == "Jogando") global.GameStatus = "Pausado"
 	else if(global.GameStatus == "Pausado") global.GameStatus = "Jogando"
 }
 
-//algoritmo de terreno
+//Restart
+if(global.GameStatus == "FimDeJogo") and (keyboard_check_pressed(vk_anykey)) room_restart();
+#endregion
+
+
+#region OPERAÇÕES
+//algoritmo de terreno (!)
 {/*}	RASCUNHO
 	Pode ser:
 	1. um algoritmo que decide o começo, meio e final do
@@ -28,8 +28,7 @@ if(keyboard_check_pressed(vk_escape))
 	2. elevar ou abaixar o nivel o terreno em uma vez.	
 */}
 
-if(global.GameStatus == "FimDeJogo") and (keyboard_check_pressed(vk_anykey)) game_restart();
-
+//Gerar obstáculos
 if(obstaculo_intervalo_t < 1) gerar_obstaculo();
 #endregion
 
@@ -37,7 +36,7 @@ if(obstaculo_intervalo_t < 1) gerar_obstaculo();
 #region MOVIMENTAÇÃO GLOBAL
 if global.GameStatus == "Jogando" //or global.GameStatus == "Transição"
 {	
-	var velh = global.velhGlobal + other.velh_acumulador;
+	var velh = global.velhGlobal + velh_acumulador;
 	repeat(velh)
 	{
 		with obj_Movel

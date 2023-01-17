@@ -16,9 +16,10 @@ function potenciacao(_numero, _expoente)
 
 
 //	Geração de Obstáculos | atual: de acordo com o tempo de jogo | ideal: de acordo com a velocidade global
+/*
 function gerar_obstaculo() //solicita bioma atual? Deveria estar no próprio controlador.
 {
-	randomize();
+	//randomize();
 	var tipo, pre_tipo, variacao;
 	
 	#region CRIA OBSTÁCULO
@@ -82,10 +83,16 @@ function gerar_obstaculo() //solicita bioma atual? Deveria estar no próprio con
 			variacao = choose("1", "2", "2", "3", "3", "3")
 			break;
 		}
+		{/*}	Nota:
+			Após esse ponto ser possivel o aparecimento de obstáculos
+			de terreno e a mudança de bioma, além di eventos especiaias
+		* /}
 	}
-	if(tipo == "obst_M") variacao = "";
+	if(tipo == "obst_M") variacao = "_";
+	else variacao += "_";
 	
-	other.obstaculo_asset_buffer = asset_get_index("spr_" + tipo + variacao + other.bioma);
+	var bioma_minus = string_lower(other.bioma)
+	other.obstaculo_asset_buffer = asset_get_index("spr_" + tipo + variacao + bioma_minus);
 	#endregion
 	
 	#region DEFINE O INTERVALO DE TEMPO
@@ -99,7 +106,7 @@ function gerar_obstaculo() //solicita bioma atual? Deveria estar no próprio con
 	show_debug_message(string(intervalo) + "'s até o proximo obstáculo.")
 	#endregion
 }
-
+//*/
 
 
 /*function alinhamento_vertical(){

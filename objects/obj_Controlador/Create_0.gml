@@ -2,16 +2,16 @@ randomize();
 
 #region	VARIÁVEIS
 	//	Propriedades Globais
-global.GameStatus = "Iniciado";
+global.GameStatus = "Iniciando";
 {/*}	global.GameStatus
-	"Iniciado"
+	"Iniciando"
+	"Pronto"
 	"Jogando"
 	"Pausado"
 	"FimDeJogo"
-	"Transição"
 */}
 nivelChao = 60; //32 + 28
-bioma = "_deserto";
+bioma = "Deserto";
 {/*}	Biomas
 	Bioma:
 		*_sub_bioma (..._variação)
@@ -49,7 +49,6 @@ obstaculo_asset_buffer = noone;
 obstaculo_intervalo_t = 1;
 
 	//	Extras
-tempo_piscar_hud = 0;
 {/*}
 contador de tempo para "game over" pro jogo não acabar
 recomeçando instantaneamente quando você morrer e estiver
@@ -58,82 +57,100 @@ com o botão apertado
 
 #endregion
 
-//	Player
+instance_create_layer(x, y, "Controladores", obj_Controlador_Visual);
+instance_create_layer(26, room_height-26, "Controladores", obj_botao);
+
 var spawn_x = camera_get_view_x(view_camera[0]) + 48;
-var spawn_y = camera_get_view_y(view_camera[0]) + 128;
-if(!instance_exists(obj_Player)) instance_create_layer(spawn_x, spawn_y, "Player", obj_Player);
+var spawn_y = room_height - nivelChao;
+/*if(!instance_exists(obj_Player))*/instance_create_layer(spawn_x, spawn_y, "Player", obj_Player);
 
 
 
-#region DESENHAR PONTUAÇÃO
-{/*} NOTA:
-	Desenhar a melhor pontuação (caso haja) em cima da pontuação atual
-	futuramente. Caso seja implementado algum chefe, o número da pontuação
-	será substituído pelo tempo até a luta acabar, que será contado da mesma
-	forma que a pontuação, porém de forma decrescente. Quando o tempo chegar
-	a zero a pontuação voltará a ser contada normalmente *de onde parou*, mas
-	com o jogador ganhando um incremento por ter sobrevivido ao chefe.
-*/}
-desenhar_pontuacao = function()
+//	Geração de Obstáculos | atual: de acordo com o tempo de jogo | ideal: de acordo com a velocidade global/*
+gerar_obstaculo = function()
 {
-	if global.GameStatus == "Iniciado" or tempo_piscar_hud < room_speed/2
+	//randomize();
+	var tipo, pre_tipo, variacao;
+	
+	#region CRIA OBSTÁCULO
+	if obstaculo_asset_buffer != noone
 	{
-		{//}	Ajustes
-			var text_x = room_width;
-			var text_y = camera_get_view_y(view_camera[0]);
+		var spawn_x = room_width * 1.2;
+		var spawn_y = room_height - nivelChao;
 	
-			draw_set_color(c_white)
-			draw_set_alpha(.5)
-	
-			draw_rectangle(text_x-19, text_y+4, text_x-86, text_y+12, false);
-	
-			draw_set_alpha(1)
-			draw_set_color(c_black)
-			draw_set_font(fonte_principal)
-			draw_set_halign(fa_right)
-			draw_set_valign(fa_top)
-		}
-	
-		var _pontuacao = "";
-		for(var i = 7; i >= 0; i--)
+		instance_create_layer(spawn_x, spawn_y, "Obstaculos", obj_Obstaculo,
 		{
-			var casa_decimal = potenciacao(10, i)
-			if pontuacao div casa_decimal >= 1
-			{
-				_pontuacao += string(pontuacao)
-				break;
-			}
-			else _pontuacao += "0"
-		}
-		draw_text_transformed(text_x-20, text_y+5, _pontuacao, .5, .5, 0);
+			sprite_index : obstaculo_asset_buffer
+		});
+	}
+	#endregion
 	
-		{//}	Ajustes
-			draw_set_valign(-1);
-			draw_set_halign(-1);
-			draw_set_font(-1);
-			draw_set_color(-1);
-		}
+	{//}
+		if(obstaculo_asset_buffer == spr_obst_M_deserto) pre_tipo = "obst_M";
+		else if(obstaculo_asset_buffer == noone) pre_tipo = "nenhum";
+		else pre_tipo = "outro";
 	}
-}
-#endregion
-
-
-#region DESENHAR TEXTO PRINCIPAL
-desenhar_texto = function(_texto, _isPiscando, _noMeio, _escala, _cor1, _cor2)
-{
-	if !_isPiscando or tempo_piscar_hud < room_speed/2
+	
+	#region DECIDE O PRÓXIMO OBSTÁCULO || NOTA: ainda falta balanceamento
+	var _periodo = clamp(floor(global.velhGlobal)-2, 0, 5)
+	switch(_periodo)
 	{
-		draw_set_font(fonte_principal)
-		draw_set_halign(fa_center)
-		draw_set_valign(fa_middle)
-		var _y = camera_get_view_y(view_camera[0]) + camera_get_view_height(view_camera[0])/2;
-		if(!_noMeio) _y += camera_get_view_height(view_camera[0])/2 - 20;
-		
-		draw_text_transformed_color(room_width/2, _y, _texto, _escala, _escala, 0, _cor1, _cor1, _cor2, _cor2, 1);
-		
-		draw_set_halign(-1)
-		draw_set_valign(-1)
-		draw_set_font(-1)
+		case 0:
+		{
+			tipo = choose("obst_P", "obst_P", "obst_G")
+			variacao = "1"
+			break;
+		}
+		case 1:
+		{
+			tipo = choose("obst_P", "obst_G")
+			variacao = choose("1", "1", "2")
+			break;
+		}
+		case 2:
+		{
+			tipo = choose("obst_P", "obst_P", "obst_G", "obst_G", "obst_M")
+			variacao = choose("1", "1", "1", "2", "2", "3")
+			break;
+		}
+		case 3:
+		{
+			tipo = choose("obst_P", "obst_G", "obst_G", "obst_M")
+			variacao = choose("1", "1", "2", "2", "2", "3", "3")
+			break;
+		}
+		case 4:
+		{
+			tipo = choose("obst_P", "obst_G", "obst_G", "obst_G", "obst_M", "obst_M")
+			variacao = choose("1", "2", "2", "2", "3", "3")
+			break;
+		}
+		case 5:
+		{
+			tipo = choose("obst_G", "obst_G", "obst_M")
+			variacao = choose("1", "2", "2", "3", "3", "3")
+			break;
+		}
+		{/*}	Nota:
+			Após esse ponto ser possivel o aparecimento de obstáculos
+			de terreno e a mudança de bioma, além di eventos especiaias
+		*/}
 	}
+	if(tipo == "obst_M") variacao = "_";
+	else variacao += "_";
+	
+	var bioma_minus = string_lower(bioma)
+	obstaculo_asset_buffer = asset_get_index("spr_" + tipo + variacao + bioma_minus);
+	#endregion
+	
+	#region DEFINE O INTERVALO DE TEMPO
+	if(pre_tipo == "nenhum") var intervalo = 2;
+	else if(pre_tipo != "obst_M") and (tipo == "obst_M") var intervalo = 2.5;
+	else var intervalo = irandom_range(2, 5) / 2;
+	intervalo -= (_periodo) / 10;
+	
+	//NOTA: tempo varia conforme velocidade aumenta. como ficaria balanceado?
+	obstaculo_intervalo_t = room_speed * intervalo 
+	show_debug_message(string(intervalo) + "'s até o proximo obstáculo.")
+	#endregion
 }
-#endregion

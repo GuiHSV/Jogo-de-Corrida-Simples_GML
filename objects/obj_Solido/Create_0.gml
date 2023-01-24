@@ -1,6 +1,6 @@
 
 #region VARIÁVEIS
-desenha_fundo = choose(false, false, true);
+desenha_fundo = choose(false, false, true, true, true);
 if(desenha_fundo)
 {
 	var _numero = choose("1_", "1_", "2_", "2_", "3_");

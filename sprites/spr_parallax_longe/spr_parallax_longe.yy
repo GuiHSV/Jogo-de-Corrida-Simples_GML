@@ -12,8 +12,8 @@
   "swfPrecision": 2.525,
   "bbox_left": 0,
   "bbox_right": 447,
-  "bbox_top": 75,
-  "bbox_bottom": 153,
+  "bbox_top": 81,
+  "bbox_bottom": 159,
   "HTile": false,
   "VTile": false,
   "For3D": false,
@@ -25,8 +25,8 @@
     "path": "texturegroups/Default",
   },
   "swatchColours": null,
-  "gridX": 0,
-  "gridY": 0,
+  "gridX": 32,
+  "gridY": 32,
   "frames": [
     {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"4085bbf6-3cf7-4b85-a612-874408edcf98",},
   ],
@@ -68,7 +68,7 @@
   ],
   "nineSlice": null,
   "parent": {
-    "name": "Parallax",
-    "path": "folders/Sprites/Parallax.yy",
+    "name": "Parallax*",
+    "path": "folders/Sprites/Parallax*.yy",
   },
 }

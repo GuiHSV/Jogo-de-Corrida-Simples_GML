@@ -68,7 +68,7 @@
   ],
   "nineSlice": null,
   "parent": {
-    "name": "Parallax",
-    "path": "folders/Sprites/Parallax.yy",
+    "name": "Parallax*",
+    "path": "folders/Sprites/Parallax*.yy",
   },
 }

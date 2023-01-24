@@ -95,6 +95,6 @@
   },
   "parent": {
     "name": "Obstáculo Grande",
-    "path": "folders/Sprites/Obstáculos/Obstáculo Grande.yy",
+    "path": "folders/Sprites/Obstáculos*/Obstáculo Grande.yy",
   },
 }

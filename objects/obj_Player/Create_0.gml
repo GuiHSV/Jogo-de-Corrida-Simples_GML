@@ -19,5 +19,5 @@ jump_buffer = 0;
 colisao_solo = function(_direcao)
 {
 	var _y = y + _direcao;
-	return collision_line(x-8,_y, x+2,_y, obj_Solido_base, false, true);
+	return collision_line(x-8,_y, x+2,_y, obj_Solido, false, true);
 }

@@ -1,23 +1,25 @@
 
-if isMovel
+#region COMPORTAMENTO
+if isMovel and global.GameStatus == "Jogando"
 {
 	velh = velh_inicial;
+	chao = colisao_solo(1);
 	
 	if(angulo < 360) angulo += 2*velh_inicial;
 	else angulo = 0;
 	image_angle = angulo;
 	
-	/**/ colisao_solo(1); //*/ if(colisao_solo(sign(1))) velv = vel_jump;
-	//else gravidade()
+	if(chao)
+	{
+		velv = -vel_jump;
+		//show_message("Teste velv: " + string(velv))
+	}
+	gravidade();
 	
-	//movimentacao_vertical();
+	movimentacao_vertical();
 }
-//definir o resto do comportamento do obstáculo quando ele for móvel
+#endregion
 
 
-if x + sprite_width/2 < camera_get_view_x(view_camera[0])
-{
-	//show_debug_message("obstáculo destruido.");
-	instance_destroy();
-}
-
+	//	Autodestruição
+if(x+sprite_width/2 < camera_get_view_x(view_camera[0])) instance_destroy();

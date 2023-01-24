@@ -93,6 +93,6 @@
   },
   "parent": {
     "name": "Obstáculo Móvel",
-    "path": "folders/Sprites/Obstáculos/Obstáculo Móvel.yy",
+    "path": "folders/Sprites/Obstáculos*/Obstáculo Móvel.yy",
   },
 }

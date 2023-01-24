@@ -10,7 +10,7 @@ global.GameStatus = "Iniciando";
 	"Pausado"
 	"FimDeJogo"
 */}
-nivelChao = 60; //32 + 28
+chao_y = room_height - 60; //32 + 28
 bioma = "Deserto";
 {/*}	Biomas
 	Bioma:
@@ -44,39 +44,66 @@ velh_acumulador = 0;
 tempo_seg = 0;
 contador_fps = room_speed;
 
-	//	Geração de obstáculos
+	//	Geração do Terreno e Obstáculos
+//terreno_timer = 0;
+terreno_imagem = 1;
+obstaculo_intervalo_t = 1; //obstaculo_timer = 1;
 obstaculo_asset_buffer = noone;
-obstaculo_intervalo_t = 1;
+
 
 	//	Extras
+//emTransicao = false;
+
 {/*}
 contador de tempo para "game over" pro jogo não acabar
 recomeçando instantaneamente quando você morrer e estiver
 com o botão apertado
 */}
+#endregion
+
+#region CRIANDO CENA
+	//	Controladores Auxiliares
+instance_create_layer(x, y, "Controladores", obj_Controlador_Visual);
+//instance_create_layer(26, 26, "Controladores", obj_botao);
+
+	//	Criando solo
+var _x = 0;
+do
+{
+	instance_create_layer(_x, chao_y, "Chao", obj_Solido,
+	{
+		sprite_index : asset_get_index("spr_solo_" + string(terreno_imagem) + "_" + string_lower(bioma)),
+		corrigir_posicao : false
+	});
+	
+	if(terreno_imagem = 3) terreno_imagem = 1;
+	else terreno_imagem++;
+	
+	_x += 64;
+}
+until _x >= room_width;
+
+	//	Player
+var spawn_x = camera_get_view_x(view_camera[0]) + 48;
+var spawn_y = chao_y;
+/*if(!instance_exists(obj_Player))*/instance_create_layer(spawn_x, spawn_y, "Player", obj_Player);
+#endregion
+
+
+#region GERA TERRENO
 
 #endregion
 
-instance_create_layer(x, y, "Controladores", obj_Controlador_Visual);
-instance_create_layer(26, room_height-26, "Controladores", obj_botao);
-
-var spawn_x = camera_get_view_x(view_camera[0]) + 48;
-var spawn_y = room_height - nivelChao;
-/*if(!instance_exists(obj_Player))*/instance_create_layer(spawn_x, spawn_y, "Player", obj_Player);
-
-
-
-//	Geração de Obstáculos | atual: de acordo com o tempo de jogo | ideal: de acordo com a velocidade global/*
+#region GERA OBSTÁCULOS
 gerar_obstaculo = function()
 {
-	//randomize();
 	var tipo, pre_tipo, variacao;
 	
 	#region CRIA OBSTÁCULO
 	if obstaculo_asset_buffer != noone
 	{
 		var spawn_x = room_width * 1.2;
-		var spawn_y = room_height - nivelChao;
+		var spawn_y = chao_y;
 	
 		instance_create_layer(spawn_x, spawn_y, "Obstaculos", obj_Obstaculo,
 		{
@@ -91,9 +118,9 @@ gerar_obstaculo = function()
 		else pre_tipo = "outro";
 	}
 	
-	#region DECIDE O PRÓXIMO OBSTÁCULO || NOTA: ainda falta balanceamento
-	var _periodo = clamp(floor(global.velhGlobal)-2, 0, 5)
-	switch(_periodo)
+	#region DECIDE O PRÓXIMO OBSTÁCULO (*) || NOTA: adequar ao aumento não linear do multiplicador
+	var _periodo = floor(global.velhGlobal)-2;
+	switch(clamp(_periodo, 0, 5))
 	{
 		case 0:
 		{
@@ -136,14 +163,13 @@ gerar_obstaculo = function()
 			de terreno e a mudança de bioma, além di eventos especiaias
 		*/}
 	}
-	if(tipo == "obst_M") variacao = "_";
-	else variacao += "_";
+	if(tipo == "obst_M") variacao = "";
 	
-	var bioma_minus = string_lower(bioma)
+	var bioma_minus = "_" + string_lower(bioma);
 	obstaculo_asset_buffer = asset_get_index("spr_" + tipo + variacao + bioma_minus);
 	#endregion
 	
-	#region DEFINE O INTERVALO DE TEMPO
+	#region DEFINE O INTERVALO DE TEMPO (*)
 	if(pre_tipo == "nenhum") var intervalo = 2;
 	else if(pre_tipo != "obst_M") and (tipo == "obst_M") var intervalo = 2.5;
 	else var intervalo = irandom_range(2, 5) / 2;
@@ -154,3 +180,4 @@ gerar_obstaculo = function()
 	show_debug_message(string(intervalo) + "'s até o proximo obstáculo.")
 	#endregion
 }
+#endregion

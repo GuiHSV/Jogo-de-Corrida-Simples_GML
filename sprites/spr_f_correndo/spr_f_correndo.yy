@@ -82,7 +82,7 @@
   ],
   "nineSlice": null,
   "parent": {
-    "name": "OutroPassaro",
-    "path": "folders/Sprites/Player/OutroPassaro.yy",
+    "name": "OutroPassaro*",
+    "path": "folders/Sprites/Player/OutroPassaro*.yy",
   },
 }

@@ -64,7 +64,8 @@
     "eventStubScript": null,
   },
   "layers": [
-    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"8334ae48-77e4-4746-addf-72cc6194cf78","visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"cacto G 2",},
+    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"dc86b406-4a53-46b5-9741-68f269b9bcda","visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"cacto G 2 (2)",},
+    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"8334ae48-77e4-4746-addf-72cc6194cf78","visible":false,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"cacto G 2",},
   ],
   "nineSlice": {
     "left": 0,
@@ -93,6 +94,6 @@
   },
   "parent": {
     "name": "Obstáculo Grande",
-    "path": "folders/Sprites/Obstáculos/Obstáculo Grande.yy",
+    "path": "folders/Sprites/Obstáculos*/Obstáculo Grande.yy",
   },
 }

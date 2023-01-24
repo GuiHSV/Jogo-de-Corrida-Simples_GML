@@ -104,7 +104,7 @@
     "resourceType": "GMNineSliceData",
   },
   "parent": {
-    "name": "Obstáculos",
-    "path": "folders/Sprites/Obstáculos.yy",
+    "name": "Obstáculos*",
+    "path": "folders/Sprites/Obstáculos*.yy",
   },
 }

@@ -12,23 +12,23 @@
   "swfPrecision": 2.525,
   "bbox_left": 0,
   "bbox_right": 447,
-  "bbox_top": 5,
-  "bbox_bottom": 213,
+  "bbox_top": 69,
+  "bbox_bottom": 101,
   "HTile": false,
   "VTile": false,
   "For3D": false,
   "DynamicTexturePage": false,
   "width": 448,
-  "height": 252,
+  "height": 102,
   "textureGroupId": {
     "name": "Default",
     "path": "texturegroups/Default",
   },
   "swatchColours": null,
-  "gridX": 0,
-  "gridY": 0,
+  "gridX": 32,
+  "gridY": 32,
   "frames": [
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"dbefd36f-930a-4468-9d4c-bec173c0aa26",},
+    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"6d83406a-4038-4b1c-88e6-2ed9aef8d7ab",},
   ],
   "sequence": {
     "resourceType": "GMSequence",
@@ -45,7 +45,7 @@
     "moments": {"Keyframes":[],"resourceVersion":"1.0","resourceType":"KeyframeStore<MomentsEventKeyframe>",},
     "tracks": [
       {"resourceType":"GMSpriteFramesTrack","resourceVersion":"1.0","name":"frames","spriteId":null,"keyframes":{"Keyframes":[
-            {"id":"b64f437c-1535-4eb5-8f92-d94286e13bdd","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"dbefd36f-930a-4468-9d4c-bec173c0aa26","path":"sprites/spr_parallax_nuvens/spr_parallax_nuvens.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
+            {"id":"ac94e59d-6322-4f0f-a3bd-fc382e832598","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"6d83406a-4038-4b1c-88e6-2ed9aef8d7ab","path":"sprites/spr_parallax_nuvens/spr_parallax_nuvens.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
           ],"resourceVersion":"1.0","resourceType":"KeyframeStore<SpriteFrameKeyframe>",},"trackColour":0,"inheritsTrackColour":true,"builtinName":0,"traits":0,"interpolation":1,"tracks":[],"events":[],"isCreationTrack":false,"modifiers":[],},
     ],
     "visibleRange": null,
@@ -64,11 +64,11 @@
     "eventStubScript": null,
   },
   "layers": [
-    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"50f8461d-1a48-4989-8d3e-051bfc7baf51","visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default",},
+    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"6379c2e8-16a7-4093-bc21-d54b5a1b6852","visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default",},
   ],
   "nineSlice": null,
   "parent": {
-    "name": "Parallax",
-    "path": "folders/Sprites/Parallax.yy",
+    "name": "Parallax*",
+    "path": "folders/Sprites/Parallax*.yy",
   },
 }

@@ -11,8 +11,8 @@
   "collisionTolerance": 0,
   "swfPrecision": 2.525,
   "bbox_left": 10,
-  "bbox_right": 20,
-  "bbox_top": 21,
+  "bbox_right": 21,
+  "bbox_top": 22,
   "bbox_bottom": 31,
   "HTile": false,
   "VTile": false,
@@ -64,6 +64,7 @@
     "eventStubScript": null,
   },
   "layers": [
+    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"7695ff16-6973-4385-8248-87fa07adfc99","visible":false,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"Layer 1",},
     {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"9c91d919-d00b-486f-95ec-f7a4faf13491","visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"cacto P 1",},
   ],
   "nineSlice": {
@@ -93,6 +94,6 @@
   },
   "parent": {
     "name": "Obstáculo Pequeno",
-    "path": "folders/Sprites/Obstáculos/Obstáculo Pequeno.yy",
+    "path": "folders/Sprites/Obstáculos*/Obstáculo Pequeno.yy",
   },
 }

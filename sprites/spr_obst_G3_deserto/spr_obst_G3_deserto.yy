@@ -10,9 +10,9 @@
   "edgeFiltering": false,
   "collisionTolerance": 0,
   "swfPrecision": 2.525,
-  "bbox_left": 12,
-  "bbox_right": 51,
-  "bbox_top": 5,
+  "bbox_left": 11,
+  "bbox_right": 54,
+  "bbox_top": 6,
   "bbox_bottom": 32,
   "HTile": false,
   "VTile": false,
@@ -64,9 +64,10 @@
     "eventStubScript": null,
   },
   "layers": [
+    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"c5ba2f39-1a5b-44b4-81d3-5d93ac75b651","visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default (2)",},
     {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"17078aaa-7288-4809-b880-96511451e5a3","visible":false,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"Layer 2",},
-    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"b74f3c1c-d40a-4849-9b91-0d7ecc0710a1","visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default",},
-    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"4348f036-f14d-4ffb-859c-b771fba963ac","visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"Layer 1",},
+    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"b74f3c1c-d40a-4849-9b91-0d7ecc0710a1","visible":false,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default",},
+    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"4348f036-f14d-4ffb-859c-b771fba963ac","visible":false,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"Layer 1",},
   ],
   "nineSlice": {
     "left": 0,
@@ -95,6 +96,6 @@
   },
   "parent": {
     "name": "Obstáculo Grande",
-    "path": "folders/Sprites/Obstáculos/Obstáculo Grande.yy",
+    "path": "folders/Sprites/Obstáculos*/Obstáculo Grande.yy",
   },
 }

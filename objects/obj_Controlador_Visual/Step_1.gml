@@ -1,12 +1,11 @@
 
-#region
+#region pisca hud
 if HudAtivada_timer < 1
 {
 	HudAtivada = !HudAtivada;
 	HudAtivada_timer = room_speed/4;
 }
 else HudAtivada_timer--;
-
 #endregion
 
 
@@ -18,9 +17,9 @@ else HudAtivada_timer--;
 	Nvens pequenas (Mais rápido)
 */}
 
-if(abs(x) >= room_width) x += room_width;
-var parallax_solo = layer_get_id("Parallax_Solo");
-layer_x(parallax_solo, x);
+//if(abs(x) >= room_width) x += room_width;
+//var parallax_solo = layer_get_id("Parallax_Solo");
+//layer_x(parallax_solo, x);
 
 var parallax, veloc;
 if global.GameStatus == "Jogando"
